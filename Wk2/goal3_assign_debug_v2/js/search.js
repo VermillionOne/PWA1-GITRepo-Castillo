@@ -25,13 +25,26 @@
 
     // Setting currentSearch equal to empty value
     currentSearch = '',
-
     validate,
-
     search,
     queryArray,
     results,
-    noMatch;
+    noMatch,
+    dbTitleEnd,
+    dbitem,
+    db,
+    qitem,
+    compare,
+    showMatches,
+    html,
+    title,
+    url,
+    titleEnd,
+
+    ii,
+    jj,
+    j,
+    i;
 
   // Validates search query
   validate = function (query) {                                                                   // "Validate" spelled "validate" - requires corrected spelling - will need to find matching references for correct spelling
@@ -74,15 +87,6 @@
   // Declare variable search to be equal to function
   search = function(query){                                                                      // Missing curly brackets
 
-  	var dbTitleEnd,
-  		dbitem,
-  		db,
-  		qitem,
-  		compare,
-  		ii,
-  		jj,
-  		j,
-  		i;
 
     // split the user's search query string into an array
     queryArray = query.join(" ");
@@ -117,7 +121,7 @@
 
     // Check that matches were found, and run output functions
     // If there are no matches =>
-    if (results.length = 0) {
+    if (results.length === 0) {
 
       // => Invoke noMatch function
       noMatch();
@@ -126,16 +130,14 @@
       // => Invoke showMatches function
       showMatches(results);
 
-    };
+    }
   };
 
   // Put "No Results" message into page (DO NOT FIX THE HTML VAR NOR THE innerHTML)
-  var noMatch = function(){
+  noMatch = function () {
 
     // Defining variable html as a concatenated string
-    var html = ''+
-      '<p>No Results found.</p>'+
-      '<p style="font-size:10px;">Try searching for "JavaScript".  Just an idea.</p>'
+    html = '<p>No Results found.</p>' + '<p style="font-size:10px;">Try searching for "JavaScript".  Just an idea.</p>'
     ;
 
     // Set the inner HTML of variable resultsDIV to the the string defined in variable html
@@ -144,17 +146,16 @@
   };
 
   // Put matches into page as paragraphs with anchors
-  var showMatches = function(results){
+  showMatches = function(results){
 
     // THE NEXT 4 LINES ARE CORRECT.
     // Defining variable html as a short paragraph tag; declaring title and url variables
-    var html = '<p>Results</p>',
+    html = ['<p>Results</p>',
       title,
-      url
-    ;                                                                                                // Missing curly brackets
+      url];                                                                                                // Missing curly brackets
 
     // loop through all the results search() function
-    for(var i=0, j=results.length; i<j; i++){
+    for(i=0, j=results.length; i < j; i =+ 1){
 
       // title of video ends with pipe
       // pull the title's string using index numbers
@@ -162,12 +163,12 @@
       title = results[i].subString(0, titleEnd);
 
       // pull the video url after the title
-      url = results[i].substring(results[i].indexOf('|')+1, results[i].length);
+      url = results[i].substring(results[i].indexOf('|') + 1, results[i].length);
 
       // make the video link - THE NEXT LINE IS CORRECT.
       html += '<p><a href=' + url + '>' + title + '</a></p>';
 
-    };
+    }
 
     // Set the inner HTML of the resultsDIV to the value of variable html
     resultsDIV.innerHTML = html; //THIS LINE IS CORRECT.
@@ -185,6 +186,7 @@
     // return false is needed for most events - this will be reviewed in upcoming course material
     // THE LINE DIRECTLY BELOW IS CORRECT
     return false;
-  ;                                                                                                  // Missing curly brackets
+
+    };                                                                                                 // Missing curly brackets
 
 })();
